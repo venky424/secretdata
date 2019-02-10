@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class SecretdData {
+public class SecretData {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -37,4 +37,5 @@ public class SecretdData {
     public void setId(Long id) {
         Id = id;
     }
+
 }

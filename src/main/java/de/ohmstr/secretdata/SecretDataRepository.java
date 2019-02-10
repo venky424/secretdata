@@ -1,4 +1,7 @@
 package de.ohmstr.secretdata;
 
-public interface SecretDataRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface SecretDataRepository extends JpaRepository<SecretData,Long> {
+
 }
