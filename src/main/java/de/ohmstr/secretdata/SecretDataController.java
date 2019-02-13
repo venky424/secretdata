@@ -25,5 +25,11 @@ public class SecretDataController {
         return sdr.findAll();
     }
 
+    @RequestMapping (path="/getmessage/")
+    public @ResponseBody String getMessage(){
+        return "Welcome to my Secret World";
+    }
+
+
 
 }
