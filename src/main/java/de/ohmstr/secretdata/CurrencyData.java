@@ -6,13 +6,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class SecretData {
+public class CurrencyData {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long Id;
     private String currencyname;
     private String currencyticker;
+
 
     public String getCurrencyname() {
         return currencyname;

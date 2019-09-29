@@ -8,26 +8,44 @@ import org.springframework.web.bind.annotation.*;
 public class SecretDataController {
 
     @Autowired
-    private SecretDataRepository sdr;
+    private CurrencyDataRepository cr;
+    private ExchangeDataRepository er;
 
-    @RequestMapping (path="/currency/")
-    public @ResponseBody String retrievCurrency(@RequestParam String currencyname, @RequestParam String currencyticker){
+    @PostMapping (path="/updcurrency/")
+    public @ResponseBody String updCurrency(@RequestParam String currencyname, @RequestParam String currencyticker){
 
-        SecretData sd=new SecretData();
-        sd.setCurrencyname(currencyname);
-        sd.setCurrencyticker(currencyticker);
-        sdr.save(sd);
+        CurrencyData cd=new CurrencyData();
+        cd.setCurrencyname(currencyname);
+        cd.setCurrencyticker(currencyticker);
+        cr.save(cd);
         return "saved";
     }
 
-    @RequestMapping (path="/allcurrency/")
-    public @ResponseBody Iterable<SecretData> getAllCurrencies(){
-        return sdr.findAll();
+    @GetMapping (path="/getcurrency/")
+    public @ResponseBody Iterable<CurrencyData> getAllCurrencies(){
+        return cr.findAll();
     }
 
-    @RequestMapping (path="/getmessage/")
+    @GetMapping (path="/getmessage/")
     public @ResponseBody String getMessage(){
         return "Welcome to my Secret World";
+    }
+
+    @PostMapping (path="/updexchange/")
+    public @ResponseBody String retrievCurrency(@RequestParam String Exchangename, @RequestParam String Exchangeurl){
+
+        ExchangeData ed=new ExchangeData();
+        ed.setExchanegName(Exchangename);
+        ed.setExchangeURL(Exchangeurl);
+        er.save(ed);
+        return "saved";
+    }
+
+    @GetMapping (path="/getexchange/")
+    public @ResponseBody Iterable<ExchangeData>  updExchange(@RequestParam String Exchangename, @RequestParam String Exchangeurl){
+
+        return er.findAll();
+
     }
 
 
