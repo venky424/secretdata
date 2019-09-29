@@ -1,15 +1,23 @@
-package de.ohmstr.secretdata;
+package de.ohmstr.secretdata.controller;
 
+import de.ohmstr.secretdata.domain.CurrencyData;
+import de.ohmstr.secretdata.domain.ExchangeData;
+import de.ohmstr.secretdata.repository.CurrencyDataRepository;
+import de.ohmstr.secretdata.repository.ExchangeDataRepository;
+import de.ohmstr.secretdata.service.CurrencyService;
+import de.ohmstr.secretdata.service.ExchangeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(path="/secretdata/")
 public class SecretDataController {
 
     @Autowired
-    private CurrencyDataRepository cr;
-    private ExchangeDataRepository er;
+    private CurrencyService cs;
+    private ExchangeService es;
 
     @PostMapping (path="/updcurrency/")
     public @ResponseBody String updCurrency(@RequestParam String currencyname, @RequestParam String currencyticker){
@@ -17,13 +25,13 @@ public class SecretDataController {
         CurrencyData cd=new CurrencyData();
         cd.setCurrencyname(currencyname);
         cd.setCurrencyticker(currencyticker);
-        cr.save(cd);
-        return "saved";
+        return cs.addCurrency(cd);
     }
 
     @GetMapping (path="/getcurrency/")
-    public @ResponseBody Iterable<CurrencyData> getAllCurrencies(){
-        return cr.findAll();
+    public @ResponseBody  List<CurrencyData> getAllCurrencies(){
+
+        return cs.getCurrency();
     }
 
     @GetMapping (path="/getmessage/")
@@ -37,14 +45,13 @@ public class SecretDataController {
         ExchangeData ed=new ExchangeData();
         ed.setExchanegName(Exchangename);
         ed.setExchangeURL(Exchangeurl);
-        er.save(ed);
-        return "saved";
+        return es.addExchange(ed);
     }
 
     @GetMapping (path="/getexchange/")
-    public @ResponseBody Iterable<ExchangeData>  updExchange(@RequestParam String Exchangename, @RequestParam String Exchangeurl){
+    public @ResponseBody List<ExchangeData>  updExchange(){
 
-        return er.findAll();
+        return es.getExchange();
 
     }
 

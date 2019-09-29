@@ -1,4 +1,4 @@
-package de.ohmstr.secretdata;
+package de.ohmstr.secretdata.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
